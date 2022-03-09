@@ -33,25 +33,65 @@ function App() {
     setInputValue("");
   };
 
+  const handleEdit = (id: number, inputValue: string) => {
+    const newTodo = todo.map((todo) => {
+      if (todo.id === id) {
+        todo.inputValue = inputValue;
+      }
+      return todo;
+    });
+    setTodo(newTodo);
+  };
+
+  const handleChecked = (id: number, checked: boolean) => {
+    const newTodo = todo.map((todo) => {
+      if (todo.id === id) {
+        todo.checked = !checked;
+      }
+      return todo;
+    });
+    setTodo(newTodo);
+  };
+
+  const handleDelete = (id: number) => {
+    const newTodo = todo.filter((todo) => todo.id !== id);
+    setTodo(newTodo);
+  };
+
   return (
     <div className="App">
-      <h1>Todo App with React/TypeScript</h1>
+      <div>
+        <h1>Todo App with React/TypeScript</h1>
 
-      <form onSubmit={(e) => handleSubmit(e)} className="form">
-        <input
-          type="text"
-          onChange={(e) => handleChange(e)}
-          className="input"
-          value={inputValue}
-        />
-        <input type="submit" value="追加" className="submit" />
-      </form>
+        <form onSubmit={(e) => handleSubmit(e)} className="form">
+          <input
+            type="text"
+            onChange={(e) => handleChange(e)}
+            className="inputText"
+            value={inputValue}
+          />
+          <input type="submit" value="追加" className="submitButton" />
+        </form>
 
-      <ul>
-        {todo.map((todo) => (
-          <li key={todo.id}>{todo.inputValue}</li>
-        ))}
-      </ul>
+        <ul className="todoList">
+          {todo.map((todo) => (
+            <li key={todo.id}>
+              <input
+                type="text"
+                onChange={(e) => handleEdit(todo.id, e.target.value)}
+                value={todo.inputValue}
+                disabled={todo.checked}
+              />
+              <input
+                type="checkbox"
+                checked={todo.checked}
+                onChange={(e) => handleChecked(todo.id, todo.checked)}
+              />
+              <button onClick={() => handleDelete(todo.id)}>消</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

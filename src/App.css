@@ -1,27 +1,31 @@
-* {
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+.App {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
 }
 
-h1 {
-  margin: 30px;
+.inputText {
+  padding: 10px;
 }
 
-.form {
-  margin: 10px;
-}
-
-.input {
-  padding: 5px;
-  margin-right: 5px;
-}
-
-.submit {
-  padding: 2px;
+.submitButton {
+  padding: 8px 15px;
   cursor: pointer;
+}
+
+.todoList {
+}
+
+.todoList li {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todoList li input {
+  padding: 7px;
 }
